@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Wondertools.MainWindow"
+        Background="#1e1c1b"
+        Title="Wondertools">
+    <DockPanel>
+		<Menu DockPanel.Dock="Top" Background="#1e1e1e" FontSize="14" Margin="4">
+			<MenuItem Header="_File">
+                <MenuItem x:Name="MenuItemOpenFile" Header="_Open File..."/>
+                <MenuItem x:Name="MenuItemOpenFolder" Header="_Open Folder..."/>
+                <Separator />
+                <MenuItem x:Name="MenuItemExit" Header="_Exit"/>
+            </MenuItem>
+			<MenuItem Header="_Edit">
+                <MenuItem x:Name="MenuItemPreferences" Header="_Preferences" IsEnabled="false"/>
+                <MenuItem x:Name="MenuItemHelp" Header="_Help" IsEnabled="false"/>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" MinWidth="100"></ColumnDefinition>
+				<ColumnDefinition Width="4"></ColumnDefinition>
+				<ColumnDefinition Width="*" MinWidth="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="#2a2a2a" CornerRadius="5">
+                <TreeView x:Name="FolderTreeView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+            </Border>
+            <GridSplitter Grid.Column="1" Background="#1e1e1e" ResizeDirection="Columns" />
+            <Border Grid.Column="2" Background="#2a2a2a" CornerRadius="5">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Margin="5" x:Name="WorkspaceUITopbar" HorizontalAlignment="Left" IsVisible="false">
+                        <Border Margin="5" Background="#1a1a1a" CornerRadius="5">
+						    <TextBlock Margin="5" x:Name="WorkspaceUIOpenedPath"></TextBlock>
+                        </Border>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="WorkspaceUISaveBtn" Content="Save" Margin="5"></Button>
+                            <Button x:Name="WorkspaceUISaveAsBtn" Content="Save As" Margin="5"></Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                        <Panel Margin="10 5" x:Name="WorkspaceUIPanel" />
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </DockPanel>
+</Window>
