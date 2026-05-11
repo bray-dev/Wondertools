@@ -102,7 +102,7 @@ namespace Wondertools
 
             if (files.Count >= 1)
             {
-                OpenFile(files[0].Path.AbsolutePath.Replace("%20", " "));
+                OpenFile(Uri.UnescapeDataString(files[0].Path.AbsolutePath));
             }
         }
 
@@ -119,7 +119,7 @@ namespace Wondertools
 
             if (folder.Count > 0)
             {
-                FolderTreeViewOpen(folder[0].Path.AbsolutePath);
+                FolderTreeViewOpen(Uri.UnescapeDataString(folder[0].Path.AbsolutePath));
             }
         }
 
@@ -133,8 +133,16 @@ namespace Wondertools
                 MessageBoxManager.GetMessageBoxStandard("Unsupported File", "File type is unsupported.", ButtonEnum.Ok).ShowAsPopupAsync(this);
                 return;
             }
-            byte[] fileData = File.ReadAllBytes(path);
-
+            byte[] fileData;
+            try
+            {
+                fileData = File.ReadAllBytes(path);
+            }
+            catch (Exception e)
+            {
+                MessageBoxManager.GetMessageBoxStandard("Error", e.Message, ButtonEnum.Ok).ShowAsPopupAsync(this);
+                return;
+            }
             Controls children = [ ..WorkspaceUIPanel.Children];
             WorkspaceUIPanel.Children.Clear();
 
@@ -178,7 +186,7 @@ namespace Wondertools
                 ]
             });
             if (file is not null)
-                selectedFile?.Save(file.Path.AbsolutePath);
+                selectedFile?.Save(Uri.UnescapeDataString(file.Path.AbsolutePath));
         }
 
         private void FolderTreeView_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
