@@ -8,6 +8,7 @@ namespace Wondertools.FileTypes
 {
     internal class AreaParamFileType : BgymlFileType
     {
+        public override string FileName => "Area Param";
         public override string FileExtension => "game__stage__AreaParam.bgyml";
 
         public override void CreateUI(Panel parentUI)

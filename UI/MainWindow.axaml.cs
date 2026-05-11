@@ -97,6 +97,7 @@ namespace Wondertools
             var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
                 Title = "Open File",
+                FileTypeFilter = [new FilePickerFileType("All Files") { Patterns = ["*.*"] }, ..supportedFileTypes.Select(kvp => new FilePickerFileType($"{supportedFileTypes[kvp.Key].FileName} Files") { Patterns = [$"*.{kvp.Key}"] })],
                 AllowMultiple = false
             });
 
@@ -176,7 +177,7 @@ namespace Wondertools
 
             var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
             {
-                Title = "Open File",
+                Title = "Save File",
                 SuggestedFileName = selectedFilePath,
                 SuggestedStartLocation = await StorageProvider.TryGetFolderFromPathAsync(Path.GetDirectoryName(selectedFilePath)),
                 FileTypeChoices =

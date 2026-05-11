@@ -8,6 +8,7 @@ namespace Wondertools.FileTypes
 {
     internal abstract class FileType
     {
+        public abstract string FileName { get; }
         public abstract string FileExtension { get; }
         public abstract void CreateUI(byte[] file, Panel parentUI);
         public abstract void Save(string path);
