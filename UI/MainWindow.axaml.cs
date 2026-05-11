@@ -183,7 +183,7 @@ namespace Wondertools
                 FileTypeChoices =
                 [
                     new FilePickerFileType($"{selectedFile.FileExtension} Files") { Patterns = [$"*.{selectedFile.FileExtension}"] },
-                    new FilePickerFileType("All Files") { Patterns = ["*"] }
+                    new FilePickerFileType("All Files") { Patterns = ["*.*"] }
                 ]
             });
             if (file is not null)
